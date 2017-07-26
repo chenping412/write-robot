@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>写作机器人</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="public/js/flexible-my.js"></script>
+    <link rel="stylesheet" type="text/css" href="dist/main.bundle.css?v=1.1.82">
+</head>
+<body>
+<div style="display: none" title="这里给QQ分享提供抓取内容">
+    <h2 class="title">抓到一只可爱的写作机器人，好友邀你来围观！！</h2>
+    <p class="summary">震惊！！这么逆天的文章居然出自写作机器人，火速围观！！！</p>
+    <img class="pic" src="http://test.giiso.com/write-robot/images/share-icon.jpg">
+</div>
+<div id="app" v-cloak :class="{'hide-up':hideUp}" >
+    <div class="web_banner" @touchmove="hideUp=true" @click="hideUp=true">
+        <div class="top">
+            <div class="logo"></div>
+            <p>写作机器人</p>
+        </div>
+        <div class="mid"></div>
+        <div class="bottom">
+            <h3>让我们一起来写作吧!</h3>
+            <p>记得先输入写作题目哦~~</p>
+        </div>
+    </div>
+    <div class="web_bottom">
+        <div class="header">
+            <div class="logo"></div>
+            <h3>写作机器人</h3>
+        </div>
+        <div class="main">
+            <div class="search">
+                <p>输入写作题目</p>
+                <div class="form-box">
+                    <form @submit="writeArticle()" action="http://tj.giiso.com/www/public/images/download_qr.png" target="nm_iframe">
+                        <input type="text" id="text-input" v-model="keyWord" placeholder="题目最多可输入30个字" maxlength="30">
+                        <button type="button" @click="writeArticle()">写作</button>
+                    </form>
+                </div>
+            </div>
+            <div class="state-ico" :class="{'state-show':stateShow}">
+                <ul>
+                    <li :class="{'fade-in':state>=1,'fade-out':state>1}">
+                        <span class="roboter-ico roboter-1"></span>
+                        <div class="progress">
+                            <h3>小智收到</h3>
+                            <p>好开森~~~</p>
+                            <div class="progress-bar"><span :style="{ 'width':stateBar1+'%' }"></span></div>
+                            <span>{{stateBar1}}%</span>
+                        </div>
+                    </li>
+                    <li :class="{'fade-in':state>=2,'fade-out':state>2}">
+                        <span class="roboter-ico roboter-2"></span>
+                        <div class="progress">
+                            <h3>搜索资料</h3>
+                            <p>稍等哦，让我找找资料... </p>
+                            <div class="progress-bar"><span :style="{ 'width':stateBar2+'%' }"></span></div>
+                            <span>{{stateBar2}}%</span>
+                        </div>
+                    </li>
+                    <li :class="{'fade-in':state>=3,'fade-out':state>3}">
+                        <span class="roboter-ico roboter-3"></span>
+                        <div class="progress">
+                            <h3>思考一下</h3>
+                            <p>抱歉，我要好好想想~~~ </p>
+                            <div class="progress-bar"><span :style="{ 'width':stateBar3+'%' }"></span></div>
+                            <span>{{stateBar3}}%</span>
+                        </div>
+                    </li>
+                    <li :class="{'fade-in2':state>=4,'fade-out':state>4}">
+                        <span class="roboter-ico roboter-4"></span>
+                        <div class="progress">
+                            <h3>开始写作</h3>
+                            <p>努力写作中~~~</p>
+                            <div class="progress-bar"><span :style="{ 'width':stateBar4+'%' }"></span></div>
+                            <span>{{stateBar4}}%</span>
+                        </div>
+                    </li>
+                    <li :class="{'fade-in2':state>=5,'fade-out':state>5}">
+                        <span class="roboter-ico roboter-5"></span>
+                        <div class="progress">
+                            <h3>完成</h3>
+                            <p>终于写完了，棒棒哒~~~</p>
+                            <div class="progress-bar"><span style="width: 100%;"></span></div>
+                            <span>100%</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="article">
+                <div class="text-area-out">
+                    <div class="text-area" id="text-area-div">{{articleData}}<span class="pen-box" id="pen-box"></span></div>
+                    <textarea v-model="articleData" id="text-area-text" @scroll="textAreaScroll()"></textarea>
+                </div>
+            </div>
+            <p class="word-number">输出文章约{{articleData.length}}字左右</p>
+        </div>
+
+        <div class="model">
+            <div class="come-ico" onclick="javascript:$('.model').fadeOut();">
+                <img src="images/come-ico.png">
+            </div>
+        </div>
+    </div>
+    <span class="pen-ico" id="pen-ico" v-show="penShow" style="display: none;"></span>
+</div>
+<iframe name="nm_iframe" style="display:none;"></iframe>
+<script type="text/javascript" src="public/js/jquery.min.js"></script>
+<script type="text/javascript" src="public/js/zepto.min.js"></script>
+<script type="text/javascript" src="public/js/touch.js"></script>
+<script type="text/javascript" src="public/js/wechatshare.js?v=1.1.51"></script>
+<script type="text/javascript" src="dist/main.bundle.js?v=1.1.22"></script>
+</body>
+</html>
